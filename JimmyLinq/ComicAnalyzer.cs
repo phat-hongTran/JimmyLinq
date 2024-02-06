@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace JimmyLinq
 {
-    class Review
+    class ComicAnalyzer
     {
-        public int Issue { get; set; }
-        public Critics Critic { get; set; }
-        public double Score { get; set; }
     }
 }
