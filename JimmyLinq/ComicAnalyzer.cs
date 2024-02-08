@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JimmyLinq
 {
-    class ComicAnalyzer
+    public class ComicAnalyzer
     {
         public static IEnumerable<string> GetReviews(IEnumerable<Comic> catalog, IEnumerable<Review> reviews)
         {
@@ -22,15 +22,15 @@ namespace JimmyLinq
         {
             var grouped = from comic in catalog
                           orderby prices[comic.Issue]
-                          group comic by CalculatePriceRange(comic) into groups
+                          group comic by CalculatePriceRange(comic, prices) into groups
                           select groups;
 
             return grouped;
         }
 
-        private static PriceRange CalculatePriceRange(Comic comic)
+        private static PriceRange CalculatePriceRange(Comic comic, IReadOnlyDictionary<int, decimal> prices)
         {
-            if (Comic.Prices[comic.Issue] > 100M)
+            if (prices[comic.Issue] > 100M)
             {
                 return PriceRange.Expensive;
             }
